@@ -1,0 +1,180 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+<title>Your Cart - Delish Bites</title> 
+<style> 
+body { 
+font-family: 'Segoe UI', sans-serif; 
+background-color: #fef9f4; 
+margin: 0; 
+} 
+header { 
+background-color: #d35400; 
+color: white; 
+padding: 10px; 
+} 
+marquee { 
+background-color: #f39c12; 
+color: #fff; 
+padding: 8px; 
+font-weight: bold; 
+} 
+.logo-title { 
+display: flex; 
+align-items: center; 
+} 
+.logo { 
+height: 50px; 
+margin-right: 10px; 
+} 
+nav { 
+display: flex; 
+justify-content: space-between; 
+align-items: center; 
+} 
+nav h1 { 
+margin-left: 10px; 
+} 
+nav ul { 
+display: flex; 
+list-style: none; 
+} 
+nav ul li { 
+margin: 0 15px; 
+} 
+nav ul li a { 
+color: white; 
+text-decoration: none; 
+font-weight: bold; 
+} 
+nav ul li a:hover { 
+text-decoration: underline; 
+} 
+header { 
+background-color: #e67e22; 
+padding: 10px 20px; 
+color: white; 
+} 
+header h1 { 
+margin: 0; 
+font-size: 26px; 
+} 
+.container { 
+max-width: 800px; 
+margin: 30px auto; 
+background: white; 
+padding: 20px; 
+border-radius: 10px; 
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); 
+} 
+h2 { 
+text-align: center; 
+color: #333; 
+} 
+table { 
+width: 100%; 
+border-collapse: collapse; 
+margin-top: 20px;} 
+th, td { 
+padding: 12px; 
+border-bottom: 1px solid #ddd; 
+text-align: left; 
+} 
+th { 
+background-color: #f7c594; 
+} 
+td.price { 
+color: #e67e22; 
+font-weight: bold; 
+} 
+.total { 
+text-align: right; 
+margin-top: 20px; 
+font-size: 20px; 
+color: #2c3e50; 
+} 
+.clear-btn { 
+background-color: #c0392b; 
+color: white; 
+border: none; 
+padding: 10px 16px; 
+font-weight: bold; 
+cursor: pointer; 
+border-radius: 5px; 
+float: right; 
+} 
+.empty { 
+text-align: center; 
+color: #999; 
+margin-top: 40px; 
+font-size: 18px; 
+} 
+footer { 
+text-align: center; 
+margin-top: 40px; 
+padding: 20px; 
+background-color: #e67e22; 
+color: white; 
+} 
+</style> 
+</head> 
+<body> 
+<header> 
+<nav> 
+<div class="logo-title"> 
+<img src="logo.png" alt="Delish Bites Logo" class="logo" /> 
+<h1>DELICE BYTES</h1> 
+</div> 
+<ul> 
+<li><a href="index.html">Home</a></li> 
+<li><a href="menu.html">Menu</a></li> 
+<li><a href="about.html">About Us</a></li> 
+<li><a href="contact.html">Contact</a></li> 
+<li><a href="cart.html">My Cart</a></li> 
+</ul> 
+</nav> 
+<marquee behavior="scroll" direction="left"> Today's Special: Buy 1 Get 1 
+Free on Burgers!</marquee> 
+</header> 
+<header> 
+<h1>🛒 Your Cart - Delish Bites</h1> 
+</header> 
+<div class="container"> 
+<h2>Cart Items</h2> 
+<div id="cartContent"></div> 
+</div> 
+<footer> 
+<p>&copy; 2025 Delish Bites. All rights reserved.</p> 
+</footer> 
+<script> 
+function loadCart() { 
+const cart = JSON.parse(localStorage.getItem("cart")) || []; 
+const cartContent = document.getElementById("cartContent"); 
+if (cart.length === 0) { 
+cartContent.innerHTML = "<p class='empty'>Your cart is currently empty /p>"
+return; 
+} 
+let total = 0; 
+let table = ` 
+<table> 
+<tr><th>Item</th><th>Price (₹)</th></tr> 
+`;cart.forEach(item => { 
+table += `<tr><td>${item.name}</td><td 
+class="price">₹${item.price}</td></tr>`; 
+total += item.price; 
+}); 
+table += `</table> 
+<div class="total">Total: ₹${total}</div> 
+<button class="clear-btn" onclick="clearCart()">Clear Cart</button> 
+`; 
+cartContent.innerHTML = table; 
+} function clearCart() { 
+localStorage.removeItem("cart"); 
+loadCart(); 
+} 
+loadCart(); 
+</script> 
+</body> 
+</html> 
